@@ -44,7 +44,7 @@ The **SR_CARDS_WEBHOOK** collection provides endpoints for health checks, retrie
 
 - **Name:** Webhook
 - **Method:** POST
-- **URL:** `http://localhost:3000/sr-cards/logs`
+- **URL:** `http://localhost:3000/sr-cards/webhook`
 - **Description:** *(No description provided)*
 
 #### Request

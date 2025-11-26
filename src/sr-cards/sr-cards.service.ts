@@ -16,34 +16,34 @@ export class SrCardsService {
     private readonly http: HttpService,
   ) {}
   async handleWebhook(callbackType: string, payload: any) {
-    console.log('Callback type: ', callbackType);
-    console.log('payload: ', payload);
-    const baseUrl = this.config.get<string>('TRUEFIN_BASE_URL');
-    const apiPasscode = this.config.get<string>('TRUEFIN_API_PASSCODE');
+    if (callbackType === 'SR_CARD_AUTH') {
+      try {
+        const baseUrl = this.config.get<string>('TRUEFIN_BASE_URL');
+        const apiPasscode = this.config.get<string>('TRUEFIN_API_PASSCODE');
 
-    try {
-      const res = await lastValueFrom(
-        this.http.post(
-          `${baseUrl}/api/withdrawals`,
-          {
-            callback_type: callbackType,
-            payload: payload,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'x-api-passcode': apiPasscode,
+        const res = await lastValueFrom(
+          this.http.post(
+            `${baseUrl}/api/withdrawals`,
+            {
+              callback_type: callbackType,
+              payload: payload,
             },
-          },
-        ),
-      );
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-passcode': apiPasscode,
+              },
+            },
+          ),
+        );
 
-      console.log(res);
+        console.log(res);
 
-      const data = res?.data;
-      console.log('POST data: ', data);
-    } catch (error) {
-      console.log(error);
+        const data = res?.data;
+        console.log('POST data: ', data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     // Store in DB

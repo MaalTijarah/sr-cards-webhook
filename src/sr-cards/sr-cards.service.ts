@@ -72,9 +72,14 @@ export class SrCardsService {
   }
 
   async listLogs() {
-    return this.prisma.webhook.findMany({
+    const logs = await this.prisma.webhook.findMany({
       orderBy: { receivedAt: 'desc' },
       take: 100,
     });
+
+    return logs.map((log) => ({
+      ...log,
+      payload: JSON.parse(log.payload),
+    }));
   }
 }

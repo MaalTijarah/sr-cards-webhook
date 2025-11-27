@@ -9,7 +9,7 @@ import {
 import { SrCardsService } from './sr-cards.service';
 import { CallBackType, Serialize } from '../decorators';
 
-@Controller('money-collect')
+@Controller('sr-cards')
 export class SrCardsController {
   constructor(private readonly srCardsService: SrCardsService) {}
 
